@@ -1,5 +1,7 @@
+using AutoMapper;
 using Employee_LeaveManagement.Contracts;
 using Employee_LeaveManagement.Data;
+using Employee_LeaveManagement.Mappings;
 using Employee_LeaveManagement.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +34,8 @@ namespace Employee_LeaveManagement
             services.AddTransient<ILeaveAllocationRepository, LeaveAllocationRepository>();
             services.AddTransient<ILeaveHistoryRepository, LeaveHistoryRepository>();
             services.AddTransient<ILeaveTypeRepository, LeaveTypeRepository>();
+
+            services.AddAutoMapper(typeof(Maps));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

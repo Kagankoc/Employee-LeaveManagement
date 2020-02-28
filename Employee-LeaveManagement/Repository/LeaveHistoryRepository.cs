@@ -20,32 +20,32 @@ namespace Employee_LeaveManagement.Repository
             return _context.LeaveHistories.ToList();
         }
 
-        public LeaveHistory FindById(Guid Id)
+        public LeaveHistory FindById(Guid id)
         {
-            return _context.LeaveHistories.Find(Id);
+            return _context.LeaveHistories.Find(id);
         }
 
         public bool Create(LeaveHistory entity)
         {
             _context.LeaveHistories.Add(entity);
-            return (_context.SaveChanges() > 0);
+            return Save();
         }
 
         public bool Update(LeaveHistory entity)
         {
             _context.LeaveHistories.Add(entity);
-            return (_context.SaveChanges() > 0);
+            return Save();
         }
 
         public bool Delete(LeaveHistory entity)
         {
             _context.LeaveHistories.Add(entity);
-            return (_context.SaveChanges() > 0);
+            return Save();
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() > 0);
         }
     }
 }

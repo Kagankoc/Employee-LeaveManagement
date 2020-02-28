@@ -20,35 +20,35 @@ namespace Employee_LeaveManagement.Repository
             return _context.Employees.ToList();
         }
 
-        public Employee FindById(Guid Id)
+        public Employee FindById(Guid id)
         {
-            return _context.Employees.Find(Id);
+            return _context.Employees.Find(id);
         }
 
         public bool Create(Employee entity)
         {
             _context.Employees.Add(entity);
 
-            return (_context.SaveChanges() > 0);
+            return Save();
         }
 
         public bool Update(Employee entity)
         {
             _context.Employees.Update(entity);
 
-            return (_context.SaveChanges() > 0);
+            return Save();
         }
 
         public bool Delete(Employee entity)
         {
             _context.Employees.Remove(entity);
 
-            return (_context.SaveChanges() > 0);
+            return Save();
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return (_context.SaveChanges() > 0);
         }
     }
 }

@@ -20,37 +20,37 @@ namespace Employee_LeaveManagement.Repository
             return _context.LeaveTypes.ToList();
         }
 
-        public LeaveType FindById(Guid Id)
+        public LeaveType FindById(Guid id)
         {
-            return _context.LeaveTypes.Find(Id);
+            return _context.LeaveTypes.Find(id);
         }
 
         public bool Create(LeaveType entity)
         {
             _context.LeaveTypes.Add(entity);
-            return _context.SaveChanges() > 0;
+            return Save();
         }
 
         public bool Update(LeaveType entity)
         {
             _context.LeaveTypes.Update(entity);
-            return _context.SaveChanges() > 0;
+            return Save();
         }
 
         public bool Delete(LeaveType entity)
         {
             _context.LeaveTypes.Remove(entity);
-            return _context.SaveChanges() > 0;
+            return Save();
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return _context.SaveChanges() > 0;
         }
 
-        public ICollection<Employee> GetEmployeesByLeaveType(Guid Id)
+        public ICollection<Employee> GetEmployeesByLeaveType(Guid id)
         {
-            var allocations = _context.LeaveAllocations.Where(x => x.LeaveType.Id == Id).ToList();
+            var allocations = _context.LeaveAllocations.Where(x => x.LeaveType.Id == id).ToList();
 
             return allocations.Select(item => item.Employee).ToList();
         }
