@@ -2,6 +2,7 @@
 using Employee_LeaveManagement.Contracts;
 using Employee_LeaveManagement.Models;
 using Employee_LeaveManagement.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,9 @@ using System.Linq;
 
 namespace Employee_LeaveManagement.Controllers
 {
+    [Authorize(Roles = "Administrator")]
+
+
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeRepository _repository;
