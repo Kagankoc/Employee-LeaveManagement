@@ -8,7 +8,7 @@ namespace Employee_LeaveManagement.Models.ViewModels
     public class LeaveAllocationViewModel
     {
         public Guid Id { get; set; }
-        public DetailsLeaveTypeViewModel LeaveType { get; set; }
+        public LeaveTypeViewModel LeaveType { get; set; }
         [Required]
 
         public int NumberOfDays { get; set; }

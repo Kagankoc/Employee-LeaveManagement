@@ -1,4 +1,5 @@
 ﻿using Employee_LeaveManagement.Models;
+using Employee_LeaveManagement.Models.ViewModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,5 +17,7 @@ namespace Employee_LeaveManagement.Data
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<LeaveTypeViewModel> DetailsLeaveTypeViewModel { get; set; }
+
     }
 }

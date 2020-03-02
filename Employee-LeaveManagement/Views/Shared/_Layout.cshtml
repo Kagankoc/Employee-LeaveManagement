@@ -6,6 +6,8 @@
     <title>@ViewData["Title"] - Employee Leave Management</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <body>
     <header>
@@ -30,7 +32,7 @@
                                 Manage
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a href="#" class="dropdown-item text-dark">Leave Type</a>
+                                <a asp-controller="LeaveTypes" asp-action="Index" class="dropdown-item text-dark">Leave Type</a>
                                 <a href="#" class="dropdown-item text-dark">Leave Allocations</a>
                                 <a href="#" class="dropdown-item text-dark">Leave Applications</a>
                                 <a href="#" class="dropdown-item text-dark">Employees</a>
@@ -55,6 +57,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
