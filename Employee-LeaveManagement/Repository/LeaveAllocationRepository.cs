@@ -1,6 +1,7 @@
 ﻿using Employee_LeaveManagement.Contracts;
 using Employee_LeaveManagement.Data;
 using Employee_LeaveManagement.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,10 @@ namespace Employee_LeaveManagement.Repository
 
         public LeaveAllocation FindById(Guid id)
         {
-            return _context.LeaveAllocations.Find(id);
+            return _context.LeaveAllocations
+                .Include(x => x.LeaveType)
+                .Include(x => x.Employee)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public bool Create(LeaveAllocation entity)
@@ -46,6 +50,27 @@ namespace Employee_LeaveManagement.Repository
         public bool Save()
         {
             return _context.SaveChanges() > 0;
+        }
+
+        public bool CheckAllocation(Guid leaveTypeId, string employeeId)
+        {
+            var period = DateTime.Now.Year;
+            return _context.LeaveAllocations.Any(x => x.EmployeeId == employeeId && x.LeaveTypeId == leaveTypeId && x.Period == period);
+        }
+
+        public ICollection<LeaveAllocation> GetLeaveAllocationsByEmployee(string id)
+        {
+            return _context.LeaveAllocations.Include(x => x.LeaveType).ToList().FindAll(x => x.EmployeeId == id);
+        }
+
+        public Employee GetEmployeeById(string id)
+        {
+            return _context.Employees.Find(id);
+        }
+
+        public LeaveType GetLeaveTypeById(Guid id)
+        {
+            return _context.LeaveTypes.Find(id);
         }
     }
 }

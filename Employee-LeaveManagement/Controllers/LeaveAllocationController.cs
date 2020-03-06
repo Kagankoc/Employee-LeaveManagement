@@ -44,9 +44,17 @@ namespace Employee_LeaveManagement.Controllers
         }
 
         // GET: LeaveAllocation/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+
+            var employee = _mapper.Map<EmployeeViewModel>(_userManager.FindByIdAsync(id).Result);
+            var allocations = _repository.GetLeaveAllocationsByEmployee(id);
+            var model = new ViewAllocationsViewModel
+            {
+                Employee = employee,
+                LeaveAllocations = _mapper.Map<List<LeaveAllocationViewModel>>(allocations)
+            };
+            return View(model);
         }
 
         // GET: LeaveAllocation/Create
@@ -73,21 +81,35 @@ namespace Employee_LeaveManagement.Controllers
         }
 
         // GET: LeaveAllocation/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var leaveAllocation = _repository.FindById(id);
+            var model = _mapper.Map<EditLeaveAllocationViewModel>(leaveAllocation);
+            return View(model);
         }
 
         // POST: LeaveAllocation/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(EditLeaveAllocationViewModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var allocation = _mapper.Map<LeaveAllocation>(model);
+                allocation.Employee = _repository.GetEmployeeById(allocation.EmployeeId);
+                allocation.LeaveType = _repository.GetLeaveTypeById(allocation.LeaveTypeId);
+                var Success = _repository.Update(allocation);
+                if (!Success)
+                {
+                    ModelState.AddModelError("", "Error While Saving");
+                    return View(model);
+                }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { id = model.EmployeeId });
             }
             catch
             {

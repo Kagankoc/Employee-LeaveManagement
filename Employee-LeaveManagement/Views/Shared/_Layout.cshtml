@@ -41,9 +41,9 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <a asp-controller="LeaveTypes" asp-action="Index" class="dropdown-item text-dark">Leave Type</a>
-                                        <a href="#" class="dropdown-item text-dark">Leave Allocations</a>
+                                        <a asp-controller="LeaveAllocation" asp-action="Index" class="dropdown-item text-dark">Leave Allocations</a>
                                         <a href="#" class="dropdown-item text-dark">Leave Applications</a>
-                                        <a href="#" class="dropdown-item text-dark">Employees</a>
+                                        <a asp-controller="LeaveAllocation" asp-action="ListEmployees" class="dropdown-item text-dark">Employees</a>
                                     </div>
                                 </li>
 

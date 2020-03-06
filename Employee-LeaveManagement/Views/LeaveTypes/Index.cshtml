@@ -18,7 +18,12 @@
             <th>
                 DateCreated
             </th>
-            <th>Actions</th>
+            <th>
+                Default Days
+            </th>
+            <th>
+                Actions
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +35,9 @@
                 </td>
                 <td>
                     @item.DateCreated
+                </td>
+                <td>
+                    @item.DefaultDays
                 </td>
                 <td>
                     <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">

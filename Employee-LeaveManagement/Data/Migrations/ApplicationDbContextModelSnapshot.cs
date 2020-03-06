@@ -31,10 +31,13 @@ namespace Employee_LeaveManagement.Data.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid?>("LeaveTypeId")
+                    b.Property<Guid>("LeaveTypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("NumberOfDays")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Period")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -96,6 +99,9 @@ namespace Employee_LeaveManagement.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DefaultDays")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -111,10 +117,14 @@ namespace Employee_LeaveManagement.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DateCreated")
+                    b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DefaultDays")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -361,7 +371,9 @@ namespace Employee_LeaveManagement.Data.Migrations
 
                     b.HasOne("Employee_LeaveManagement.Models.LeaveType", "LeaveType")
                         .WithMany()
-                        .HasForeignKey("LeaveTypeId");
+                        .HasForeignKey("LeaveTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Employee_LeaveManagement.Models.LeaveHistory", b =>

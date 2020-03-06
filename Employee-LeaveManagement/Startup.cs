@@ -27,7 +27,7 @@ namespace Employee_LeaveManagement
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging());
 
             //Add References for Repository 
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
