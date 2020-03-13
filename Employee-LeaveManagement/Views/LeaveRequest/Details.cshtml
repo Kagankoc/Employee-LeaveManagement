@@ -1,0 +1,78 @@
+﻿@model LeaveRequestViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Review of @Model.RequestingEmployee.FirstName @Model.RequestingEmployee.LastName 's Leave Request</h1>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Details">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="RequestingEmployeeId" class="control-label"></label>
+                <input type="text" asp-for="RequestingEmployeeId" class="form-control" readonly value="@Model.RequestingEmployeeId" />
+                <span asp-validation-for="RequestingEmployeeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input type="datetime" asp-for="StartDate" class="form-control" readonly value="@Model.StartDate.ToShortDateString()" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input type="datetime" asp-for="EndDate" class="form-control" readonly value="@Model.EndDate.ToShortDateString()" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="LeaveType" class="control-label">Leave Type</label>
+                <input asp-for="LeaveType" class="form-control" readonly value="@Model.LeaveType.Name" />
+                <span asp-validation-for="LeaveType" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="@Model.LeaveTypeId" />
+            <div class="form-group">
+                <label asp-for="RequestDate" class="control-label"></label>
+                <input type="datetime" asp-for="RequestDate" class="form-control" readonly value="@Model.RequestDate.ToShortDateString()" />
+                <span asp-validation-for="RequestDate" class="text-danger"></span>
+            </div>
+
+            <input hidden asp-for="ActionDate" class="form-control" readonly />
+            <span asp-validation-for="ActionDate" class="text-danger"></span>
+
+            <div class="form-group">
+                <label asp-for="Approved" class="control-label"></label>
+
+                @if (Model.Approved == null)
+                {<select asp-for="Approved" class="form-control">
+                        <option name="Default" value="null" disabled selected hidden>Accept or Reject</option>
+                        <option name="Accept" value="true">Accept</option>
+                        <option name="Reject" value="false">Reject</option>
+                    </select>
+                }
+                else
+                {
+                    <input asp-for="Approved" class="form-control" readonly value="@Model.Approved" />
+                }
+
+
+
+            </div>
+            @if (Model.Approved == null)
+            {
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+
+            }
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

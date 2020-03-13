@@ -22,7 +22,7 @@ namespace Employee_LeaveManagement.Repository
 
         public Employee FindById(Guid id)
         {
-            return _context.Employees.Find(id);
+            return _context.Employees.FirstOrDefault(x => x.Id == id.ToString());
         }
 
         public bool Create(Employee entity)

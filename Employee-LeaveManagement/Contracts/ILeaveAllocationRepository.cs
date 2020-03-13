@@ -10,5 +10,6 @@ namespace Employee_LeaveManagement.Contracts
         ICollection<LeaveAllocation> GetLeaveAllocationsByEmployee(string id);
         public Employee GetEmployeeById(string id);
         public LeaveType GetLeaveTypeById(Guid id);
+        LeaveAllocation GetLeaveAllocationByEmployeeAndLeaveType(string employeeId, Guid leaveTypeId);
     }
 }

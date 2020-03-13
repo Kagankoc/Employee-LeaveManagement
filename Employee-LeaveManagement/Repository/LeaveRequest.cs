@@ -2,7 +2,7 @@
 
 namespace Employee_LeaveManagement.Models
 {
-    public class LeaveHistory
+    public class LeaveRequest
     {
         public Guid Id { get; set; }
         public bool? Approved { get; set; }
@@ -13,6 +13,8 @@ namespace Employee_LeaveManagement.Models
         public DateTime EndDate { get; set; }
         public LeaveType LeaveType { get; set; }
         public DateTime StartDate { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 
 

@@ -13,14 +13,12 @@ namespace Employee_LeaveManagement.Data
 
         }
 
-        public DbSet<LeaveHistory> LeaveHistories { get; set; }
+        public DbSet<LeaveRequest> LeaveRequests { get; set; }
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<LeaveTypeViewModel> DetailsLeaveTypeViewModel { get; set; }
-        public DbSet<Employee_LeaveManagement.Models.ViewModels.EmployeeViewModel> EmployeeViewModel { get; set; }
-        public DbSet<Employee_LeaveManagement.Models.ViewModels.LeaveAllocationViewModel> LeaveAllocationViewModel { get; set; }
-        public DbSet<Employee_LeaveManagement.Models.ViewModels.EditLeaveAllocationViewModel> EditLeaveAllocationViewModel { get; set; }
+        public DbSet<LeaveRequestViewModel> LeaveRequestViewModel { get; set; }
+
 
     }
 }

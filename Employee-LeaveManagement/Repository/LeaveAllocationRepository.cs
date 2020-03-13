@@ -60,7 +60,8 @@ namespace Employee_LeaveManagement.Repository
 
         public ICollection<LeaveAllocation> GetLeaveAllocationsByEmployee(string id)
         {
-            return _context.LeaveAllocations.Include(x => x.LeaveType).ToList().FindAll(x => x.EmployeeId == id);
+            var datePeriod = DateTime.Now.Year;
+            return _context.LeaveAllocations.Include(x => x.LeaveType).ToList().FindAll(x => x.EmployeeId == id && x.Period == datePeriod);
         }
 
         public Employee GetEmployeeById(string id)
@@ -71,6 +72,13 @@ namespace Employee_LeaveManagement.Repository
         public LeaveType GetLeaveTypeById(Guid id)
         {
             return _context.LeaveTypes.Find(id);
+        }
+
+        public LeaveAllocation GetLeaveAllocationByEmployeeAndLeaveType(string employeeId, Guid leaveTypeId)
+        {
+            var datePeriod = DateTime.Now.Year;
+            return _context.LeaveAllocations.Include(x => x.LeaveType).ToList()
+                .FirstOrDefault(x => x.EmployeeId == employeeId && x.LeaveTypeId == leaveTypeId && x.Period == datePeriod);
         }
     }
 }

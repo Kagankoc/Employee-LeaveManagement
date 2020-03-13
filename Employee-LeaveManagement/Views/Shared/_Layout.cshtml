@@ -1,6 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
+﻿@inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@using Microsoft.AspNetCore.Identity
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,12 +12,14 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Employee Leave Management</a>
+                <a class="navbar-brand" asp-area="" asp-controller="LeaveRequest" asp-action="MyLeave">Employee Leave Management</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -26,12 +28,12 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="LeaveRequest" asp-action="MyLeave">Home</a>
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Apply For Leave</a>
+                                <a class="nav-link text-white" asp-controller="LeaveRequest" asp-action="Create">Apply For Leave</a>
                             </li>
                             @if (User.IsInRole("Administrator"))
                             {
@@ -42,7 +44,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <a asp-controller="LeaveTypes" asp-action="Index" class="dropdown-item text-dark">Leave Type</a>
                                         <a asp-controller="LeaveAllocation" asp-action="Index" class="dropdown-item text-dark">Leave Allocations</a>
-                                        <a href="#" class="dropdown-item text-dark">Leave Applications</a>
+                                        <a asp-controller="LeaveRequest" asp-action="Index" class="dropdown-item text-dark">Leave Applications</a>
                                         <a asp-controller="LeaveAllocation" asp-action="ListEmployees" class="dropdown-item text-dark">Employees</a>
                                     </div>
                                 </li>
@@ -66,9 +68,12 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
 
     @RenderSection("Scripts", required: false)
 </body>

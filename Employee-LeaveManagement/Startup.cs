@@ -32,7 +32,7 @@ namespace Employee_LeaveManagement
             //Add References for Repository 
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<ILeaveAllocationRepository, LeaveAllocationRepository>();
-            services.AddTransient<ILeaveHistoryRepository, LeaveHistoryRepository>();
+            services.AddTransient<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddTransient<ILeaveTypeRepository, LeaveTypeRepository>();
 
             services.AddAutoMapper(typeof(Maps));
@@ -73,7 +73,7 @@ namespace Employee_LeaveManagement
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=LeaveRequest}/{action=MyLeave}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
