@@ -73,7 +73,7 @@ namespace Employee_LeaveManagement
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=LeaveRequest}/{action=MyLeave}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
